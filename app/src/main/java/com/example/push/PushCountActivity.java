@@ -106,8 +106,13 @@ public class PushCountActivity extends Activity implements SensorEventListener {
         for (Map.Entry<Integer, String> item_map : mapSensor.entrySet()) {
             int type = item_map.getKey();
             String name = item_map.getValue();
-            String content = String.format("%d %s：%s\n", type, mSensorType[type - 1], name);
-            show_content += content;
+            if (type - 1 >= mSensorType.length){
+                String content = String.format("类型：%d 名称:%s：%s\n", type, "未知名称", name);
+                show_content += content;
+            }else{
+                String content = String.format("类型：%d 名称:%s：%s\n", type, mSensorType[type - 1], name);
+                show_content += content;
+            }
         }
         tv_sensor.setText(show_content);
     }
